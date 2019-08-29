@@ -1,28 +1,35 @@
 package com.tw.vapasi;
+
+import java.util.Objects;
+
 //Understands the chances of occurrences of Events
 class ProbabilityComparator {
 
-    private double probability;
+    final private double value;
 
-    ProbabilityComparator(double probability)
+    ProbabilityComparator(double value)
     {
-        this.probability = probability;
+        this.value = value;
     }
 
-    boolean equals(ProbabilityComparator otherProbability) {
+    public boolean equals(Object otherProbability) {
         if(this == otherProbability) {
             return true;
         }
         if((otherProbability == null) || (otherProbability.getClass() != this.getClass()))
             return false;
 
-        if(this.probability == otherProbability.probability)
+        if(this.value == ((ProbabilityComparator)otherProbability).value)
             return true;
-        else
-            return false;
+
+        return false;
     }
 
-    double combineProbability(ProbabilityComparator otherProbability){
-        return this.probability * otherProbability.probability;
+    public int hashCode() {
+        return Objects.hashCode(this);
+    }
+
+    ProbabilityComparator and(ProbabilityComparator otherProbability){
+        return new ProbabilityComparator(this.value * otherProbability.value);
     }
 }
