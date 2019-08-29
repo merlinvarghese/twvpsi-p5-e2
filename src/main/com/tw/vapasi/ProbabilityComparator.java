@@ -2,16 +2,27 @@ package com.tw.vapasi;
 //Understands the chances of occurrences of Events
 class ProbabilityComparator {
 
-    private int numberOfChances;
-    private int eventOccurrences;
+    private double probability;
 
-    ProbabilityComparator(int numberOfChances, int eventOccurrence)
+    ProbabilityComparator(double probability)
     {
-        this.numberOfChances = numberOfChances;
-        this.eventOccurrences = eventOccurrences;
+        this.probability = probability;
     }
 
-    boolean isEqual(ProbabilityComparator probability) {
-        return true;
+    boolean equals(ProbabilityComparator otherProbability) {
+        if(this == otherProbability) {
+            return true;
+        }
+        if((otherProbability == null) || (otherProbability.getClass() != this.getClass()))
+            return false;
+
+        if(this.probability == otherProbability.probability)
+            return true;
+        else
+            return false;
+    }
+
+    double combineProbability(ProbabilityComparator otherProbability){
+        return this.probability * otherProbability.probability;
     }
 }
